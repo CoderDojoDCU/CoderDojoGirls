@@ -1,0 +1,112 @@
+<html>
+	<head>
+	<style>
+	body{
+		background-color:#66ff66;
+	}
+	h1{
+		text-align:center;
+	}
+	.Button_Style{
+		background-color:#ff99bb;
+		width:200px;
+		height:30px;
+		font-size:14pt;
+		border: 2px solid black;
+	}
+	</style>
+	</head>
+	<body>
+		<h1>Secret Messages</h1>
+		
+		<h3>Encryption</h3>
+		
+		<p>Please enter a message and a key</p>
+		
+		<table>
+			<tr>
+				<td>Please enter your message</td>
+				<td><input type="text" id="strMessage" name="strMessage" width="150px;"></td>
+			</tr>
+			<tr>
+				<td>Please enter your key</td>
+				<td><input type="text" id="strKey" name="strKey" width="150px;"></td>
+			</tr>
+		</table>
+		
+		<input type="button" id="btn_Encrypt" name="btn_Encrypt" value="Click Me" onclick="fn_TestFunction();" class="Button_Style">                                     
+		<div id="div_Message"></div>
+		<br><br>
+		<h3>Decryption</h3>
+		<p>Please type in a message to decrypt and a key</p>
+		
+		<table>
+			<tr>
+				<td>Please enter your message</td>
+				<td><input type="text" id="strEncrypted_Message" name="strEncrypted_Message" width="150px;"></td>
+			</tr>
+			<tr>
+				<td>Please enter your key</td>
+				<td><input type="text" id="strKey_Decrypt" name="strKey_Decrypt" width="150px;"></td>
+			</tr>
+		</table>
+		<input type="button" name="btn_Decrypt" id="btn_Decrypt" class="Button_Style" value="Decrypt Message">
+		<div id="div_Decrypted"></div>
+		
+	<script type="text/javascript">
+	
+	function fn_TestFunction(){
+		//code goes here
+		var strMessage = document.getElementById('strMessage').value;
+		var strKey = document.getElementById('strKey').value;
+		var aryAlphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+		var strEncoded = '';
+		var intNewKey = 0;
+		
+		if(strMessage != '' && strKey != ''){
+			for(var i=0; i < strMessage.length; i++){
+				//code
+				if(strMessage[i] == ' '){
+					strEncoded = strEncoded + ' ';
+				}
+				else{
+					for(var x = 0; x < aryAlphabet.length; x++){
+						if(strMessage[i] == aryAlphabet[x]){
+							intNewKey = x + parseInt(strKey);
+							if(intNewKey >= aryAlphabet.length){
+								//if we're encoding y, then x will be equal to 24
+								// x + 2 = 26. 26 is greater than the length of our array
+								//we change x to be equal to x - 26 which will give us 0
+								//So y is encoded to a as a is the 1st element
+								intNewKey = intNewKey - aryAlphabet.length;
+							}
+							
+							strEncoded = strEncoded + aryAlphabet[intNewKey];
+
+						}
+					}
+				}
+			}
+			document.getElementById('div_Message').innerHTML = strEncoded;
+		}
+		else{
+			alert('The message or the key is empty. Please fill it in and try again');
+		}
+		
+	}
+	
+	function fn_DecryptMessage(){
+		//code goes here
+		var strEncrypted_Message = document.getElementById('strEncrypted_Message').value;
+		var strKey_Decrypt = document.getElementById('strKey_Decrypt').value;
+		var aryAlphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+		var strDecoded = '';
+		var intNewKey = 0;
+		
+		
+	
+	}
+	
+	</script>
+	</body>
+</html>
